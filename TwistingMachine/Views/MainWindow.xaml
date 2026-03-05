@@ -206,27 +206,27 @@
                     <Button Grid.Row="2" Margin="5" Width="200" Height="60" Content="上胶带" Background="Red" Foreground="White" Command="{Binding ApplyTapeCommand}"/>
 
                     <!-- 前后选择区 -->
-                    <Grid Grid.Row="3" Background="Red">
+                    <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="前" Margin="0,0,0,10"/>
-                            <TextBlock Text="后" Margin="0,10,0,0"/>
+                            <TextBlock Text="前" Margin="0,0,0,10" FontSize="16"/>
+                            <TextBlock Text="后" Margin="0,10,0,0" FontSize="16"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor1}"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor2}"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor3}"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor4}"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
-                                <Button Width="40" Height="40" Margin="5" Background="LightGray"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor5}"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor6}"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor7}"/>
+                                <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor8}"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
