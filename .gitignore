@@ -1,0 +1,10 @@
+# Visual Studio 缓存目录
+.vs/
+
+# 编译输出目录
+bin/
+obj/
+
+# 用户配置文件
+*.user
+*.suo
