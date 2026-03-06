@@ -27,18 +27,6 @@ namespace TwistingMachine.ViewModels
             CurrentViewModel = PageViewModels.First();
         }
 
-        public ObservableCollection<BindableBase> PageViewModels { get; set; }
-
-        private BindableBase _currentViewModel;
-        public BindableBase CurrentViewModel
-        {
-            get => _currentViewModel;
-            set => SetProperty(ref _currentViewModel, value);
-        }
-
-        public ICommand CloseCommand { get; private set; }
-        public ICommand MinimizeCommand { get; private set; }
-
         private void Close()
         {
             Application.Current.Shutdown();
@@ -52,5 +40,23 @@ namespace TwistingMachine.ViewModels
                 mainWindow.WindowState = WindowState.Minimized;
             }
         }
+
+        #region 变量
+
+        public ObservableCollection<BindableBase> PageViewModels { get; set; }
+
+        private BindableBase _currentViewModel = null!;
+        public BindableBase CurrentViewModel
+        {
+            get => _currentViewModel;
+            set => SetProperty(ref _currentViewModel, value);
+        }
+        #endregion
+
+        #region 命令
+
+        public ICommand CloseCommand { get; private set; }
+        public ICommand MinimizeCommand { get; private set; }
+        #endregion
     }
 }
