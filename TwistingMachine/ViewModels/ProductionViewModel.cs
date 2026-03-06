@@ -15,6 +15,7 @@ namespace TwistingMachine.ViewModels
             LoosenJawsCommand = new DelegateCommand(LoosenJaws);
             ResetCommand = new DelegateCommand(Reset);
             ApplyTapeCommand = new DelegateCommand(ApplyTape);
+            SaveParametersCommand = new DelegateCommand(SaveParameters);
 
             // 初始化胶带模式下拉框数据源
             TapeModeOptions = new Dictionary<int, string>
@@ -41,7 +42,7 @@ namespace TwistingMachine.ViewModels
         {
             try
             {
-                var param = DbManager.Inst.QueryData<ProductParameters>();
+                var param = DbManager.Inst.QueryDatas<ProductParameters>().Where(p => p.RecipeName == "AAA").First();
 
                 if (param != null)
                 {
@@ -62,6 +63,9 @@ namespace TwistingMachine.ViewModels
         }
 
         private PackIconMaterialKind _iconKind = PackIconMaterialKind.Home;
+        /// <summary>
+        /// 导航图标
+        /// </summary>
         public PackIconMaterialKind IconKind
         {
             get { return _iconKind; }
@@ -70,16 +74,42 @@ namespace TwistingMachine.ViewModels
 
         #region 方法
 
+        /// <summary>
+        /// 松开夹爪
+        /// </summary>
         private void LoosenJaws()
         {
         }
 
+        /// <summary>
+        /// 重置
+        /// </summary>
         private void Reset()
         {
         }
 
+        /// <summary>
+        /// 上胶带
+        /// </summary>
         private void ApplyTape()
         {
+        }
+
+        /// <summary>
+        /// 保存参数
+        /// </summary>
+        public void SaveParameters()
+        {
+            try
+            {
+                // 保存数据
+                DbManager.Inst.UpdateData(ProductParameters);
+                Serilog.Log.Warning("ProductionViewModel:参数保存成功");
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Error($"ProductionViewModel:参数保存失败：{ex.Message}");
+            }
         }
 
         #endregion
@@ -87,10 +117,16 @@ namespace TwistingMachine.ViewModels
         #region 属性
 
         private ProductParameters _productParameters = new ProductParameters();
+        /// <summary>
+        /// 当前产品参数
+        /// </summary>
         public ProductParameters ProductParameters
         {
             get { return _productParameters; }
-            set { SetProperty(ref _productParameters, value); }
+            set
+            {
+                SetProperty(ref _productParameters, value);
+            }
         }
 
         /// <summary>
@@ -114,6 +150,9 @@ namespace TwistingMachine.ViewModels
         }
 
         private string _wire1Color = "Green";
+        /// <summary>
+        /// 线色
+        /// </summary>
         public string Wire1Color
         {
             get { return _wire1Color; }
@@ -121,38 +160,28 @@ namespace TwistingMachine.ViewModels
         }
 
         private string _wire2Color = "Blue";
+        /// <summary>
+        /// 线色
+        /// </summary>
         public string Wire2Color
         {
             get { return _wire2Color; }
             set { SetProperty(ref _wire2Color, value); }
         }
 
-        private string _currentProductionQuantity = "0";
-        public string CurrentProductionQuantity
+        private FrontBackColors _frontBackColors = new FrontBackColors();
+        /// <summary>
+        /// 前后选择区方块颜色
+        /// </summary>
+        public FrontBackColors FrontBackColors
         {
-            get { return _currentProductionQuantity; }
-            set { SetProperty(ref _currentProductionQuantity, value); }
+            get { return _frontBackColors; }
+            set { SetProperty(ref _frontBackColors, value); }
         }
 
-        private string _ct = "0";
-        public string CT
-        {
-            get { return _ct; }
-            set { SetProperty(ref _ct, value); }
-        }
-
-        #endregion
-
-        #region 命令
-
-        public ICommand LoosenJawsCommand { get; private set; }
-        public ICommand ResetCommand { get; private set; }
-        public ICommand ApplyTapeCommand { get; private set; }
-
-        #endregion
-
-        #region 绘制双绞线属性
-
+        /// <summary>
+        /// 绞线路径
+        /// </summary>
         public string Wire1Path
         {
             get
@@ -161,6 +190,9 @@ namespace TwistingMachine.ViewModels
             }
         }
 
+        /// <summary>
+        /// 绞线路径
+        /// </summary>
         public string Wire2Path
         {
             get
@@ -171,14 +203,12 @@ namespace TwistingMachine.ViewModels
 
         #endregion
 
-        #region 前后选择区方块颜色
+        #region 命令
 
-        private FrontBackColors _frontBackColors = new FrontBackColors();
-        public FrontBackColors FrontBackColors
-        {
-            get { return _frontBackColors; }
-            set { SetProperty(ref _frontBackColors, value); }
-        }
+        public ICommand LoosenJawsCommand { get; private set; }
+        public ICommand ResetCommand { get; private set; }
+        public ICommand ApplyTapeCommand { get; private set; }
+        public ICommand SaveParametersCommand { get; private set; }
 
         #endregion
     }

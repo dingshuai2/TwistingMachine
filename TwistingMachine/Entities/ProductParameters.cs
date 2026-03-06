@@ -1,5 +1,7 @@
 using SqlSugar;
 using Prism.Mvvm;
+using TwistingMachine.DbHelpers;
+using Serilog;
 
 namespace TwistingMachine.Entities
 {
@@ -9,6 +11,8 @@ namespace TwistingMachine.Entities
     [SugarTable("ProductParameters")]
     public class ProductParameters : BindableBase
     {
+
+
         /// <summary>
         /// 主键ID
         /// </summary>

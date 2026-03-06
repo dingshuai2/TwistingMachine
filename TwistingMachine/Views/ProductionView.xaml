@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DesignHeight="670" d:DesignWidth="1000">
@@ -65,9 +66,21 @@
                     <!-- 第一行 -->
                     <TextBlock Grid.Column="0" Text="胶带模式:" VerticalAlignment="Center" FontSize="16"/>
                     <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="200" Height="30" FontSize="16" HorizontalAlignment="Left" 
-                              ItemsSource="{Binding TapeModeOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TapeMode}" />
+                              ItemsSource="{Binding TapeModeOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TapeMode}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                     <TextBlock Grid.Column="3" Text="配方名称：" VerticalAlignment="Center" FontSize="16"/>
-                    <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Width="200" Height="30" HorizontalAlignment="Left" Text="{Binding ProductParameters.RecipeName}" FontSize="16"/>
+                    <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Width="200" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ProductParameters.RecipeName}" FontSize="16">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
 
                     <!-- 第二行 -->
                     <Grid Grid.Row="1" Grid.ColumnSpan="7">
@@ -79,21 +92,39 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="线芯面积" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.CoreArea}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.CoreArea}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm²" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="左端开口" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.LeftEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.LeftEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="线前长度" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.WireFrontLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.WireFrontLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
@@ -109,21 +140,39 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="导线外径" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.WireOuterDiameter}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.WireOuterDiameter}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="右端开口" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.RightEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.RightEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="大拉气压" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.LargePullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.LargePullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="Mpa" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
@@ -139,21 +188,39 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="绞后长度" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.TwistedLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistedLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="过绞合量" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.OverTwistAmount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.OverTwistAmount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="%" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="小拉气压" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.SmallPullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.SmallPullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="Mpa" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
@@ -169,21 +236,39 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="绞合节距" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.TwistPitch}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistPitch}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="绞线缆数" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.TwistWireCount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistWireCount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="根" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="修正系数" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.CorrectionFactor}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.CorrectionFactor}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
@@ -198,7 +283,13 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="节距补偿" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.PitchCompensation}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.PitchCompensation}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
@@ -206,7 +297,13 @@
                             <TextBlock Text="绞合方向" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
                                 <ComboBox Width="100" Height="30" FontSize="16" 
-                                          ItemsSource="{Binding TwistDirectionOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TwistDirection}" />
+                                          ItemsSource="{Binding TwistDirectionOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TwistDirection}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
@@ -215,7 +312,13 @@
 
                     <!--第七行-->
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="设定生产数量：" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="16"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="28" Text="{Binding ProductParameters.SetProductionQuantity}" Margin="0,0,0,0" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="25" Text="{Binding ProductParameters.SetProductionQuantity}" Margin="0,0,0,0" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                 </Grid>
             </GroupBox>
 
