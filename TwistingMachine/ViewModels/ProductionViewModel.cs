@@ -41,8 +41,7 @@ namespace TwistingMachine.ViewModels
         {
             try
             {
-                var db = DbContext.Db;
-                var param = db.Queryable<ProductParameters>().First();
+                var param = DbManager.Inst.QueryData<ProductParameters>();
 
                 if (param != null)
                 {
