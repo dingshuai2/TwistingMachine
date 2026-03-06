@@ -1,12 +1,21 @@
-<Controls:MetroWindow x:Class="TwistingMachine.Dialogs.TestDialog"
+<MetroControls:MetroWindow x:Class="TwistingMachine.Dialogs.TestDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:MetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="测试弹窗"
-        Height="300"
-        Width="400"
-        WindowStartupLocation="CenterOwner">
-    <Grid>
+        Height="500"
+        Width="750"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        ShowCloseButton="True"
+        ShowMinButton="False"
+        ShowMaxRestoreButton="False"
+        TitleBarHeight="30"
+        BorderThickness="1"
+        BorderBrush="#E0E0E0"
+        Background="#E0E0E0">
+    <Grid Background="White">
         <StackPanel Margin="20">
             <TextBlock Text="这是一个测试弹窗" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
             <TextBlock Text="弹窗内容：" Margin="0,0,0,10"/>
@@ -17,4 +26,4 @@
             </StackPanel>
         </StackPanel>
     </Grid>
-</Controls:MetroWindow>
+</MetroControls:MetroWindow>

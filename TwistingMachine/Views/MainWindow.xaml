@@ -9,8 +9,11 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000"
-        WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized">
+        Title="MainWindow"
+        WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized"
+        Background="White"
+        ShowCloseButton="False" ShowMinButton="False" ShowMaxRestoreButton="False"
+        TitleBarHeight="0" BorderThickness="0">
     <Controls:MetroWindow.Resources>
         <!-- 页面数据模板 -->
         <DataTemplate DataType="{x:Type viewModels:ProductionViewModel}">
@@ -124,32 +127,38 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <!-- 第一行：底部操作按钮 -->
-            <Grid Grid.Row="0">
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="复位" Width="100" Height="40" Margin="20,0,0,0"/>
-                    <TextBlock Text="当前生产数量: 0" Margin="20,0,0,0" VerticalAlignment="Center"/>
-                    <Button Content="清零" Width="100" Height="40" Margin="20,0,0,0"/>
-                    <Button Content="终止工单" Width="100" Height="40" Margin="20,0,0,0"/>
-                    <Button Content="报警详情—>" Width="100" Height="40" Margin="20,0,0,0"/>
-                    <Button Content="测试弹窗" Width="100" Height="40" Margin="20,0,0,0" Command="{Binding OpenTestDialogCommand}"/>
-                </StackPanel>
-            </Grid>
+            <Border BorderThickness="0,1,0,1" BorderBrush="Black">
+                <Grid Background="LightGray">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="复位" Width="100" Height="40" Margin="20,0,0,0"/>
+                        <TextBlock Text="当前生产数量: 0" Margin="20,0,0,0" VerticalAlignment="Center"/>
+                        <Button Content="清零" Width="100" Height="40" Margin="20,0,0,0"/>
+                        <Button Content="终止工单" Width="100" Height="40" Margin="20,0,0,0"/>
+                        <Button Content="报警详情—>" Width="100" Height="40" Margin="20,0,0,0"/>
+                        <Button Content="测试弹窗" Width="100" Height="40" Margin="20,0,0,0" Command="{Binding OpenTestDialogCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
             <!--第二行：状态栏-->
-            <Grid Grid.Row="1" Background="LightGray">
-                <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Center">
-                    <TextBlock Text="连接状态: 正常" Margin="0,0,20,0" FontSize="16"/>
-                    <TextBlock Text="设备状态: 正常"  Margin="0,0,20,0" FontSize="16"/>
-                    <TextBlock Text="MES状态: 正常"  Margin="0,0,20,0" FontSize="16"/>
-                    <TextBlock Text="权限等级: 管理员"  Margin="0,0,20,0" FontSize="16"/>
-                    <TextBlock Text="当前配方: AAA"  Margin="0,0,20,0" FontSize="16"/>
-                </StackPanel>
-            </Grid>
+            <Border BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Row="1" >
+                <Grid Background="LightGray">
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="连接状态: 正常" Margin="0,0,20,0" FontSize="16"/>
+                        <TextBlock Text="设备状态: 正常"  Margin="0,0,20,0" FontSize="16"/>
+                        <TextBlock Text="MES状态: 正常"  Margin="0,0,20,0" FontSize="16"/>
+                        <TextBlock Text="权限等级: 管理员"  Margin="0,0,20,0" FontSize="16"/>
+                        <TextBlock Text="当前配方: AAA"  Margin="0,0,20,0" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
             <!--第三行：报警信息-->
-            <Grid Grid.Row="2" Margin="0,2,0,0" Background="LightGray">
-
-            </Grid>
+            <Border BorderThickness="0,0,0,1" BorderBrush="Black" Grid.Row="2" >
+                <Grid Background="LightGray">
+                    <TextBlock Text="无报警" FontSize="16" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </Border>
 
             <!--第四行：服务热线-->
             <Grid Grid.Row="3" Background="LightGray" Margin="0,2,0,0">

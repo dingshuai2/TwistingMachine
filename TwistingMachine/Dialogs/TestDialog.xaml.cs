@@ -13,6 +13,7 @@ namespace TwistingMachine.Dialogs
         public TestDialog(MetroWindow wd)
         {
             InitializeComponent();
+            this.Owner = wd;
         }
     }
 }
