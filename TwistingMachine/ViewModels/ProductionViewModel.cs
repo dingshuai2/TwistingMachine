@@ -102,6 +102,9 @@ namespace TwistingMachine.ViewModels
         {
             try
             {
+                if (ProductParameters == null)
+                    return;
+
                 // 保存数据
                 DbManager.Inst.UpdateData(ProductParameters);
             }

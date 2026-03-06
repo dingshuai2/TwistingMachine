@@ -100,17 +100,47 @@
         <!-- 标题栏 -->
         <Grid Grid.Row="0" Background="#0066CC">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="HACNT" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="20,0,0,0"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
-                <Button  Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">📊</Button>
-                <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">⚙️</Button>
-                <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">📋</Button>
-                <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">🔧</Button>
-                <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">📈</Button>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <TextBlock Text="鸿" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,5,0"/>
+                <TextBlock Text="康" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,5,0"/>
+                <TextBlock Text="科" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,5,0"/>
+                <TextBlock Text="技" FontSize="22" FontWeight="Bold" Foreground="White"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" Foreground="White" ToolTip="权限管理">
+                    <StackPanel>
+                        <iconPacks:PackIconMaterial Kind="ShieldAccount" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="权限管理" FontSize="10" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" Foreground="White" ToolTip="报警记录">
+                    <StackPanel>
+                        <iconPacks:PackIconMaterial Kind="BellAlert" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="报警记录" FontSize="10" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" Foreground="White" ToolTip="MES切换">
+                    <StackPanel>
+                        <iconPacks:PackIconMaterial Kind="CloudSync" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="MES切换" FontSize="10" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" Foreground="White" ToolTip="语言">
+                    <StackPanel>
+                        <iconPacks:PackIconMaterial Kind="Translate" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="语言" FontSize="10" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" Foreground="White" ToolTip="帮助">
+                    <StackPanel>
+                        <iconPacks:PackIconMaterial Kind="HelpCircle" Width="20" Height="20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="帮助" FontSize="10" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0">
                 <Button Width="20" Height="20" Background="Transparent" BorderBrush="Transparent" Foreground="White" Command="{Binding MinimizeCommand}">_</Button>
@@ -168,7 +198,7 @@
 
             <!--第四行：服务热线-->
             <Grid Grid.Row="3" Background="LightGray" Margin="0,2,0,0">
-                <TextBlock Text="服务热线：000 000 000 000 | 2026年03月06日 | XX智能设备有限公司"  FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBlock Text="服务热线：000 000 000 000 | 鸿康科技有限公司"  FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </Grid>
         </Grid>
     </Grid>
