@@ -4,6 +4,10 @@ using System.Windows.Input;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TwistingMachine.Dialogs;
+using MahApps.Metro.Controls;
+using TwistingMachine.Helpers;
+using System;
 
 namespace TwistingMachine.ViewModels
 {
@@ -13,6 +17,7 @@ namespace TwistingMachine.ViewModels
         {
             CloseCommand = new DelegateCommand(Close);
             MinimizeCommand = new DelegateCommand(Minimize);
+            OpenTestDialogCommand = new DelegateCommand(OpenTestDialog);
 
             PageViewModels = new ObservableCollection<BindableBase>
             {
@@ -27,11 +32,33 @@ namespace TwistingMachine.ViewModels
             CurrentViewModel = PageViewModels.First();
         }
 
+        private void OpenTestDialog()
+        {
+            try
+            {
+                MetroWindow? wd = Application.Current.MainWindow as MetroWindow;
+                var dlg = new TestDialog(wd);
+                TestDialogViewModel dlgModel = new TestDialogViewModel();
+                dlg.DataContext = dlgModel;
+                dlg.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Logger.Error($"打开测试弹窗出错：{ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 关闭应用程序
+        /// </summary>
         private void Close()
         {
             Application.Current.Shutdown();
         }
 
+        /// <summary>
+        /// 最小化程序
+        /// </summary>
         private void Minimize()
         {
             var mainWindow = Application.Current.MainWindow;
@@ -57,6 +84,7 @@ namespace TwistingMachine.ViewModels
 
         public ICommand CloseCommand { get; private set; }
         public ICommand MinimizeCommand { get; private set; }
+        public ICommand OpenTestDialogCommand { get; private set; }
         #endregion
     }
 }
