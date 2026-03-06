@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using TwistingMachine.Dialogs;
 using MahApps.Metro.Controls;
-using TwistingMachine.Helpers;
+using Serilog;
 using System;
 
 namespace TwistingMachine.ViewModels
@@ -44,7 +44,7 @@ namespace TwistingMachine.ViewModels
             }
             catch (Exception ex)
             {
-                LogHelper.Logger.Error($"打开测试弹窗出错：{ex.Message}");
+                Log.Error($"打开测试弹窗出错：{ex.Message}");
             }
         }
 

@@ -104,7 +104,6 @@ namespace TwistingMachine.ViewModels
             {
                 // 保存数据
                 DbManager.Inst.UpdateData(ProductParameters);
-                Serilog.Log.Warning("ProductionViewModel:参数保存成功");
             }
             catch (Exception ex)
             {
