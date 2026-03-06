@@ -25,15 +25,18 @@ namespace TwistingMachine.Views
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // 确保窗口最大化时不被任务栏挡住
-            WindowState = WindowState.Normal;
-            // 设置窗口位置和大小为工作区域（不包含任务栏）
-            Left = SystemParameters.WorkArea.Left;
-            Top = SystemParameters.WorkArea.Top;
-            Width = SystemParameters.WorkArea.Width;
-            Height = SystemParameters.WorkArea.Height;
-            // 应用最大化
-            WindowState = WindowState.Maximized;
+            // 1. 获取工作区大小（不包含任务栏）
+            var workArea = SystemParameters.WorkArea;
+
+            // 2. 精确设置窗口位置和尺寸（匹配工作区）
+            this.WindowState = WindowState.Normal;
+            this.Left = workArea.Left;
+            this.Top = workArea.Top;
+            this.Width = workArea.Width;
+            this.Height = workArea.Height;
+
+            // 3. 强制刷新布局，确保设置生效
+            this.UpdateLayout();
         }
     }
 }

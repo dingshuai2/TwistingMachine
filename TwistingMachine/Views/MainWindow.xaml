@@ -7,6 +7,7 @@
         xmlns:viewModels="clr-namespace:TwistingMachine.ViewModels"
         xmlns:views="clr-namespace:TwistingMachine.Views"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         Title="MainWindow"
@@ -35,20 +36,30 @@
             <views:RecipeView/>
         </DataTemplate>
 
+        <!-- 自定义TabItem头部模板：图标+文字 -->
+        <DataTemplate x:Key="TabItemHeaderTemplate">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <!-- 图标 -->
+                <iconPacks:PackIconMaterial Kind="{Binding IconKind}" Width="32" Height="32"/>
+                <!-- 文字 -->
+                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Margin="5,0,0,0" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+
         <!-- TabItem 样式：左侧导航按钮 -->
         <Style TargetType="TabItem">
-            <Setter Property="Height" Value="40"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Width" Value="150"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Background" Value="#E0E0E0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Margin" Value="2"/>
+            <!-- 应用自定义头部模板（图标+文字） -->
+            <Setter Property="HeaderTemplate" Value="{StaticResource TabItemHeaderTemplate}"/>
+            <!-- 样式触发器 -->
             <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#0066CC"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
+                <!-- 鼠标悬停 -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#D0D0D0"/>
                 </Trigger>
@@ -64,7 +75,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- 选项卡头区域（左侧） -->
-                <StackPanel Grid.Column="0" Background="#E0E0E0" Margin="0" IsItemsHost="True"/>
+                <StackPanel Grid.Column="0" Margin="0" IsItemsHost="True"/>
 
                 <!-- 内容显示区域（右侧） -->
                 <Border Grid.Column="1" Background="White" Margin="2,0,0,0">
@@ -95,7 +106,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="HACNT" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="20,0,0,0"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
-                <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">📊</Button>
+                <Button  Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">📊</Button>
                 <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">⚙️</Button>
                 <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">📋</Button>
                 <Button Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Foreground="White">🔧</Button>
@@ -111,20 +122,15 @@
         <TabControl Grid.Row="1" Margin="0"
                     SelectedItem="{Binding CurrentViewModel}"
                     ItemsSource="{Binding PageViewModels}">
-            <TabControl.ItemContainerStyle>
-                <Style TargetType="TabItem">
-                    <Setter Property="Header" Value="{Binding Title}"/>
-                </Style>
-            </TabControl.ItemContainerStyle>
         </TabControl>
 
         <!--操作和状态栏-->
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
             <!-- 第一行：底部操作按钮 -->
             <Border BorderThickness="0,1,0,1" BorderBrush="Black">
@@ -162,7 +168,7 @@
 
             <!--第四行：服务热线-->
             <Grid Grid.Row="3" Background="LightGray" Margin="0,2,0,0">
-                <TextBlock Text="服务热线：000 000 000 000 | 2026年03月06日 | XX智能设备有限公司"  FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                <TextBlock Text="服务热线：000 000 000 000 | 2026年03月06日 | XX智能设备有限公司"  FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </Grid>
         </Grid>
     </Grid>

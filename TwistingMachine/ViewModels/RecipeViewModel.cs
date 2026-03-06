@@ -1,4 +1,5 @@
 using Prism.Mvvm;
+using MahApps.Metro.IconPacks;
 
 namespace TwistingMachine.ViewModels
 {
@@ -9,6 +10,13 @@ namespace TwistingMachine.ViewModels
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+
+        private PackIconMaterialKind _iconKind = PackIconMaterialKind.BookOpenPageVariant;
+        public PackIconMaterialKind IconKind
+        {
+            get { return _iconKind; }
+            set { SetProperty(ref _iconKind, value); }
         }
     }
 }

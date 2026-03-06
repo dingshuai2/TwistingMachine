@@ -1,6 +1,7 @@
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
+using MahApps.Metro.IconPacks;
 
 namespace TwistingMachine.ViewModels
 {
@@ -18,6 +19,13 @@ namespace TwistingMachine.ViewModels
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+
+        private PackIconMaterialKind _iconKind = PackIconMaterialKind.Home;
+        public PackIconMaterialKind IconKind
+        {
+            get { return _iconKind; }
+            set { SetProperty(ref _iconKind, value); }
         }
 
         #region 方法
