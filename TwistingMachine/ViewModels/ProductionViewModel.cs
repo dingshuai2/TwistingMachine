@@ -2,6 +2,8 @@ using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
 using MahApps.Metro.IconPacks;
+using TwistingMachine.Entities;
+using TwistingMachine.DbHelpers;
 
 namespace TwistingMachine.ViewModels
 {
@@ -12,6 +14,29 @@ namespace TwistingMachine.ViewModels
             LoosenJawsCommand = new DelegateCommand(LoosenJaws);
             ResetCommand = new DelegateCommand(Reset);
             ApplyTapeCommand = new DelegateCommand(ApplyTape);
+
+            LoadParametersFromDatabase();
+        }
+
+        /// <summary>
+        /// 加载参数
+        /// </summary>
+        private void LoadParametersFromDatabase()
+        {
+            try
+            {
+                var db = DbContext.Db;
+                var param = db.Queryable<ProductParameters>().First();
+
+                if (param != null)
+                {
+                    ProductParameters = param;
+                }
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Error($"ProductionViewModel:当前生产界面产品参数加载参数失败：{ex.Message}");
+            }
         }
 
         private string _title = "正在生产";
@@ -46,11 +71,11 @@ namespace TwistingMachine.ViewModels
 
         #region 属性
 
-        private string _recipeName = "配方测试名称";
-        public string RecipeName
+        private ProductParameters _productParameters = new ProductParameters();
+        public ProductParameters ProductParameters
         {
-            get { return _recipeName; }
-            set { SetProperty(ref _recipeName, value); }
+            get { return _productParameters; }
+            set { SetProperty(ref _productParameters, value); }
         }
 
         private string _wire1Color = "Green";
@@ -67,116 +92,11 @@ namespace TwistingMachine.ViewModels
             set { SetProperty(ref _wire2Color, value); }
         }
 
-        private string _coreArea = "1.5";
-        public string CoreArea
-        {
-            get { return _coreArea; }
-            set { SetProperty(ref _coreArea, value); }
-        }
-
-        private string _wireOuterDiameter = "2.5";
-        public string WireOuterDiameter
-        {
-            get { return _wireOuterDiameter; }
-            set { SetProperty(ref _wireOuterDiameter, value); }
-        }
-
-        private string _twistedLength = "3500";
-        public string TwistedLength
-        {
-            get { return _twistedLength; }
-            set { SetProperty(ref _twistedLength, value); }
-        }
-
-        private string _twistPitch = "35";
-        public string TwistPitch
-        {
-            get { return _twistPitch; }
-            set { SetProperty(ref _twistPitch, value); }
-        }
-
-        private string _pitchCompensation = "-1";
-        public string PitchCompensation
-        {
-            get { return _pitchCompensation; }
-            set { SetProperty(ref _pitchCompensation, value); }
-        }
-
-        private string _setProductionQuantity = "";
-        public string SetProductionQuantity
-        {
-            get { return _setProductionQuantity; }
-            set { SetProperty(ref _setProductionQuantity, value); }
-        }
-
         private string _currentProductionQuantity = "0";
         public string CurrentProductionQuantity
         {
             get { return _currentProductionQuantity; }
             set { SetProperty(ref _currentProductionQuantity, value); }
-        }
-
-        private string _leftEndOpening = "35";
-        public string LeftEndOpening
-        {
-            get { return _leftEndOpening; }
-            set { SetProperty(ref _leftEndOpening, value); }
-        }
-
-        private string _rightEndOpening = "35";
-        public string RightEndOpening
-        {
-            get { return _rightEndOpening; }
-            set { SetProperty(ref _rightEndOpening, value); }
-        }
-
-        private string _overTwistAmount = "15";
-        public string OverTwistAmount
-        {
-            get { return _overTwistAmount; }
-            set { SetProperty(ref _overTwistAmount, value); }
-        }
-
-        private string _twistWireCount = "2";
-        public string TwistWireCount
-        {
-            get { return _twistWireCount; }
-            set { SetProperty(ref _twistWireCount, value); }
-        }
-
-        private string _twistDirection = "逆时针";
-        public string TwistDirection
-        {
-            get { return _twistDirection; }
-            set { SetProperty(ref _twistDirection, value); }
-        }
-
-        private string _wireFrontLength = "5500";
-        public string WireFrontLength
-        {
-            get { return _wireFrontLength; }
-            set { SetProperty(ref _wireFrontLength, value); }
-        }
-
-        private string _largePullPressure = "0.08";
-        public string LargePullPressure
-        {
-            get { return _largePullPressure; }
-            set { SetProperty(ref _largePullPressure, value); }
-        }
-
-        private string _smallPullPressure = "0.22";
-        public string SmallPullPressure
-        {
-            get { return _smallPullPressure; }
-            set { SetProperty(ref _smallPullPressure, value); }
-        }
-
-        private string _correctionFactor = "1";
-        public string CorrectionFactor
-        {
-            get { return _correctionFactor; }
-            set { SetProperty(ref _correctionFactor, value); }
         }
 
         private string _ct = "0";
