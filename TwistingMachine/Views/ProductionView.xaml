@@ -17,19 +17,33 @@
         <!-- 第一行：缩略图 -->
         <GroupBox Grid.Row="0" Header="缩略图" BorderBrush="Gray" BorderThickness="1" Margin="5">
             <Grid>
-                <Canvas Margin="-400,0,0,100" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Path Data="{Binding Wire1Path}" Stroke="{Binding Wire1Color}" StrokeThickness="4"/>
-                    <Path Data="{Binding Wire2Path}" Stroke="{Binding Wire2Color}" StrokeThickness="4"/>
-                    <Rectangle Canvas.Left="160" Canvas.Top="25" Width="10" Height="40" Fill="Black"/>
-                    <Path Data="{Binding Wire1Path}" Stroke="{Binding Wire1Color}" StrokeThickness="4"/>
-                    <Path Data="{Binding Wire2Path}" Stroke="{Binding Wire2Color}" StrokeThickness="4"/>
-                    <Rectangle Canvas.Left="315" Canvas.Top="25" Width="10" Height="40" Fill="Black"/>
-                    <Path Data="{Binding Wire1Path}" Stroke="{Binding Wire1Color}" StrokeThickness="4"/>
-                    <Path Data="{Binding Wire2Path}" Stroke="{Binding Wire2Color}" StrokeThickness="4"/>
-                    <TextBlock Canvas.Left="260" Canvas.Top="5" Text="3500"/>
-                    <TextBlock Canvas.Left="90" Canvas.Top="60" Text="35"/>
-                    <TextBlock Canvas.Left="260" Canvas.Top="60" Text="35"/>
-                    <TextBlock Canvas.Left="430" Canvas.Top="60" Text="35"/>
+                <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="150">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- 左侧线段 -->
+                        <ItemsControl ItemsSource="{Binding LeftLineList}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <!-- 中间绞合部分 -->
+                        <ItemsControl ItemsSource="{Binding LineList}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <!-- 右侧线段 -->
+                        <ItemsControl ItemsSource="{Binding RightLineList}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
                 </Canvas>
             </Grid>
         </GroupBox>

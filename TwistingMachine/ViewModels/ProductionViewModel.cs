@@ -5,9 +5,39 @@ using MahApps.Metro.IconPacks;
 using TwistingMachine.Entities;
 using TwistingMachine.DbHelpers;
 using System.Collections.Generic;
+using Serilog;
+using System.Windows.Media;
+using System.Windows;
+using System.Text;
 
 namespace TwistingMachine.ViewModels
 {
+    /// <summary>
+    /// 线缆参数类
+    /// </summary>
+    public class ProductWireTwisPairInfo
+    {
+        /// <summary>
+        /// 显示线径
+        /// </summary>
+        public double ShowWireDiam { get; set; }
+
+        /// <summary>
+        /// 线颜色
+        /// </summary>
+        public Color ColorStroke { get; set; }
+
+        /// <summary>
+        /// 线颜色1
+        /// </summary>
+        public Color ColorStroke1 { get; set; }
+
+        /// <summary>
+        /// 线颜色2
+        /// </summary>
+        public Color ColorStroke2 { get; set; }
+    }
+
     public class ProductionViewModel : BindableBase
     {
         public ProductionViewModel()
@@ -33,6 +63,25 @@ namespace TwistingMachine.ViewModels
             };
 
             LoadParametersFromDatabase();
+
+            // 初始化线缆绘制
+            var wire1 = new ProductWireTwisPairInfo
+            {
+                ShowWireDiam = 8,
+                ColorStroke = Colors.Green,
+                ColorStroke1 = Colors.Green,
+                ColorStroke2 = Colors.Green
+            };
+
+            var wire2 = new ProductWireTwisPairInfo
+            {
+                ShowWireDiam = 8,
+                ColorStroke = Colors.Blue,
+                ColorStroke1 = Colors.Blue,
+                ColorStroke2 = Colors.Blue
+            };
+
+            DrawTwistedPair(wire1, wire2);
         }
 
         /// <summary>
@@ -116,6 +165,211 @@ namespace TwistingMachine.ViewModels
 
         #endregion
 
+        #region 画线
+        /// <summary>
+        /// 画双绞线缆
+        /// </summary>
+        /// <param name="wireParam1">线1参数</param>
+        /// <param name="wireParam2">线2参数</param>
+        private void DrawTwistedPair(ProductWireTwisPairInfo wireParam1, ProductWireTwisPairInfo wireParam2)
+        {
+            try
+            {
+                //清空画线
+                LeftLineList.Clear();
+                LineList.Clear();
+                RightLineList.Clear();
+
+                double leftStartX = 0; //左侧起始X位置
+                double threadResidueW = 80; //线头宽度（直线）
+                double threadResidueW2 = 80; //线头宽度（曲线）
+                double threadResidueH = 40; //线头高度（曲线）
+                double lineLen = 480; //线长
+                double y1 = 5; //上起始位置1
+                double y2 = Math.Max(wireParam1.ShowWireDiam, wireParam2.ShowWireDiam) + 10; //上起始位置2
+                double line1ShowDiam = wireParam1.ColorStroke != Colors.White ? wireParam1.ShowWireDiam : wireParam1.ShowWireDiam + 2;
+                double line2ShowDiam = wireParam2.ColorStroke != Colors.White ? wireParam2.ShowWireDiam : wireParam2.ShowWireDiam + 2;
+                double firstLineLen = threadResidueW + threadResidueW2 + lineLen; //线左侧+线长
+
+                #region 线头（直线）
+                //线1左侧直线（中线以上）
+                if (wireParam1.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line1LMainPathB = PaintLine(new List<Point> { new Point(leftStartX, y1), new Point(leftStartX + threadResidueW, y1) }, new SolidColorBrush(Colors.Black), 2);
+                    LeftLineList.Add(line1LMainPathB);
+                }
+                System.Windows.Shapes.Path line1LMainPath = PaintLine(new List<Point> { new Point(leftStartX, y1), new Point(leftStartX + threadResidueW, y1) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                LeftLineList.Add(line1LMainPath);
+                System.Windows.Shapes.Path line1LSubPath = PaintLine(new List<Point> { new Point(leftStartX, y1), new Point(leftStartX + threadResidueW, y1) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                LeftLineList.Add(line1LSubPath);
+                //线1右侧直线（中线以下）
+                if (wireParam1.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line1RMainPathB = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y1), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y1) }, new SolidColorBrush(Colors.Black), 2);
+                    RightLineList.Add(line1RMainPathB);
+                }
+                System.Windows.Shapes.Path line1RMainPath = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y1), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y1) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                RightLineList.Add(line1RMainPath);
+                System.Windows.Shapes.Path line1RSubPath = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y1), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y1) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                RightLineList.Add(line1RSubPath);
+                //线2左侧直线（中线以下）
+                if (wireParam2.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line2LMainPathB = PaintLine(new List<Point> { new Point(leftStartX, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW, y2 + threadResidueH * 2) }, new SolidColorBrush(Colors.Black), 2);
+                    LeftLineList.Add(line2LMainPathB);
+                }
+                System.Windows.Shapes.Path line2LMainPath = PaintLine(new List<Point> { new Point(leftStartX, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW, y2 + threadResidueH * 2) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                LeftLineList.Add(line2LMainPath);
+                System.Windows.Shapes.Path line2LSubPath = PaintLine(new List<Point> { new Point(leftStartX, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW, y2 + threadResidueH * 2) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                LeftLineList.Add(line2LSubPath);
+                //线2右侧直线（中线以下）
+                if (wireParam2.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line2RMainPathB = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH * 2) }, new SolidColorBrush(Colors.Black), 2);
+                    RightLineList.Add(line2RMainPathB);
+                }
+                System.Windows.Shapes.Path line2RMainPath = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH * 2) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                RightLineList.Add(line2RMainPath);
+                System.Windows.Shapes.Path line2RSubPath = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH * 2) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                RightLineList.Add(line2RSubPath);
+                #endregion
+
+                #region 线头（曲线）
+                //线1左侧曲线（中线以上，由上向下）
+                if (wireParam1.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line1LMainPath2B = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW, y1), new Point(leftStartX + threadResidueW2, y2 + threadResidueH) }, new SolidColorBrush(Colors.Black), 2);
+                    LeftLineList.Add(line1LMainPath2B);
+                }
+                System.Windows.Shapes.Path line1LMainPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW, y1), new Point(leftStartX + threadResidueW2, y2 + threadResidueH) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                LeftLineList.Add(line1LMainPath2);
+                System.Windows.Shapes.Path line1LSubPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW, y1), new Point(leftStartX + threadResidueW2, y2 + threadResidueH) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                LeftLineList.Add(line1LSubPath2);
+                //线2左侧曲线（中线以下，由下向上）
+                if (wireParam2.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line2LMainPath2B = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW2, y2 + threadResidueH) }, new SolidColorBrush(Colors.Black), 2);
+                    LeftLineList.Add(line2LMainPath2B);
+                }
+                System.Windows.Shapes.Path line2LMainPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW2, y2 + threadResidueH) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                LeftLineList.Add(line2LMainPath2);
+                System.Windows.Shapes.Path line2LSubPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW2, y2 + threadResidueH) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                LeftLineList.Add(line2LSubPath2);
+                //线1右侧曲线（中线以上，由下向上）
+                if (wireParam1.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line1RMainPath2B = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y1), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH) }, new SolidColorBrush(Colors.Black), 2);
+                    RightLineList.Add(line1RMainPath2B);
+                }
+                System.Windows.Shapes.Path line1RMainPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y1), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                RightLineList.Add(line1RMainPath2);
+                System.Windows.Shapes.Path line1RSubPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y1), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH) }, new SolidColorBrush(wireParam1.ColorStroke), line1ShowDiam);
+                RightLineList.Add(line1RSubPath2);
+                //线2右侧曲线（中线以下，由上向下）
+                if (wireParam2.ColorStroke == Colors.White) //白线追加显示黑边
+                {
+                    System.Windows.Shapes.Path line2RMainPath2B = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH) }, new SolidColorBrush(Colors.Black), 2);
+                    RightLineList.Add(line2RMainPath2B);
+                }
+                System.Windows.Shapes.Path line2RMainPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                RightLineList.Add(line2RMainPath2);
+                System.Windows.Shapes.Path line2RSubPath2 = PaintLine(new List<Point> { new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen, y2 + threadResidueH * 2), new Point(leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW, y2 + threadResidueH) }, new SolidColorBrush(wireParam2.ColorStroke), line2ShowDiam);
+                RightLineList.Add(line2RSubPath2);
+                #endregion
+
+                #region 线长
+                double startX = leftStartX + threadResidueW + threadResidueW2; //双绞样式线长起始位
+                y1 += 40; //上起始位置1
+                y2 += 40; //上起始位置2
+                for (int i = 0; i < 6; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        //线2曲线前半部分
+                        if (wireParam2.ColorStroke2 == Colors.White) //白线追加显示黑边
+                        {
+                            System.Windows.Shapes.Path line2MainPath1B = PaintLine(new List<Point> { new Point(startX + i * 80, y1), new Point(startX + (i + 1) * 80, y2) }, new SolidColorBrush(Colors.Black), 2);
+                            LineList.Add(line2MainPath1B);
+                        }
+                        System.Windows.Shapes.Path line2MainPath1 = PaintLine(new List<Point> { new Point(startX + i * 80, y1), new Point(startX + (i + 1) * 80, y2) }, new SolidColorBrush(wireParam2.ColorStroke2), line2ShowDiam);
+                        LineList.Add(line2MainPath1);
+                        System.Windows.Shapes.Path line2SubPath1 = PaintLine(new List<Point> { new Point(startX + i * 80, y1), new Point(startX + (i + 1) * 80, y2) }, new SolidColorBrush(wireParam2.ColorStroke2), line2ShowDiam);
+                        LineList.Add(line2SubPath1);
+                        //线1曲线后半部分
+                        if (wireParam1.ColorStroke1 == Colors.White) //白线追加显示黑边
+                        {
+                            System.Windows.Shapes.Path line1MainPath1B = PaintLine(new List<Point> { new Point(startX + i * 80, y2), new Point(startX + (i + 1) * 80, y1) }, new SolidColorBrush(Colors.Black), 2);
+                            LineList.Add(line1MainPath1B);
+                        }
+                        System.Windows.Shapes.Path line1MainPath1 = PaintLine(new List<Point> { new Point(startX + i * 80, y2), new Point(startX + (i + 1) * 80, y1) }, new SolidColorBrush(wireParam1.ColorStroke1), line1ShowDiam);
+                        LineList.Add(line1MainPath1);
+                        System.Windows.Shapes.Path line1SubPath1 = PaintLine(new List<Point> { new Point(startX + i * 80, y2), new Point(startX + (i + 1) * 80, y1) }, new SolidColorBrush(wireParam1.ColorStroke1), line1ShowDiam);
+                        LineList.Add(line1SubPath1);
+                        //线1曲线前半部分
+                        if (wireParam1.ColorStroke1 == Colors.White) //白线追加显示黑边
+                        {
+                            System.Windows.Shapes.Path line1MainPath2B = PaintLine(new List<Point> { new Point(startX + (i + 1) * 80, y1), new Point(startX + (i + 2) * 80, y2) }, new SolidColorBrush(Colors.Black), 2);
+                            LineList.Add(line1MainPath2B);
+                        }
+                        System.Windows.Shapes.Path line1MainPath2 = PaintLine(new List<Point> { new Point(startX + (i + 1) * 80, y1), new Point(startX + (i + 2) * 80, y2) }, new SolidColorBrush(wireParam1.ColorStroke1), line1ShowDiam);
+                        LineList.Add(line1MainPath2);
+                        System.Windows.Shapes.Path line1SubPath2 = PaintLine(new List<Point> { new Point(startX + (i + 1) * 80, y1), new Point(startX + (i + 2) * 80, y2) }, new SolidColorBrush(wireParam1.ColorStroke1), line1ShowDiam);
+                        LineList.Add(line1SubPath2);
+                        //线2曲线后半部分
+                        if (wireParam2.ColorStroke2 == Colors.White) //白线追加显示黑边
+                        {
+                            System.Windows.Shapes.Path line2MainPath2B = PaintLine(new List<Point> { new Point(startX + (i + 1) * 80, y2), new Point(startX + (i + 2) * 80, y1) }, new SolidColorBrush(Colors.Black), 2);
+                            LineList.Add(line2MainPath2B);
+                        }
+                        System.Windows.Shapes.Path line2MainPath2 = PaintLine(new List<Point> { new Point(startX + (i + 1) * 80, y2), new Point(startX + (i + 2) * 80, y1) }, new SolidColorBrush(wireParam2.ColorStroke2), line2ShowDiam);
+                        LineList.Add(line2MainPath2);
+                        System.Windows.Shapes.Path line2SubPath2 = PaintLine(new List<Point> { new Point(startX + (i + 1) * 80, y2), new Point(startX + (i + 2) * 80, y1) }, new SolidColorBrush(wireParam2.ColorStroke2), line2ShowDiam);
+                        LineList.Add(line2SubPath2);
+                    }
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Error("绘制双绞线缆出错: {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 绘制贝塞尔曲线
+        /// </summary>
+        /// <param name="points">点集合</param>
+        /// <param name="brush">线颜色</param>
+        /// <param name="thickness">线粗</param>
+        /// <returns></returns>
+        private System.Windows.Shapes.Path PaintLine(List<Point> points, Brush brush, double thickness = 8)
+        {
+            try
+            {
+                if (points.Count < 2)
+                    return null;
+
+                StringBuilder data = new StringBuilder("M");
+                data.AppendFormat(" {0},{1}", points[0].X, points[0].Y);
+
+                for (int i = 1; i < points.Count; i++)
+                {
+                    double midX = (points[i - 1].X + points[i].X) / 2;
+                    Point control1 = new Point(midX, points[i - 1].Y);
+                    Point control2 = new Point(midX, points[i].Y);
+                    data.AppendFormat(" C {0},{1} {2},{3} {4},{5}", control1.X, control1.Y, control2.X, control2.Y, points[i].X, points[i].Y);
+                }
+
+                return new System.Windows.Shapes.Path { Stroke = brush, StrokeThickness = thickness, Data = Geometry.Parse(data.ToString()) };
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Error("绘制贝塞尔曲线出错: {0}", ex.Message);
+                return null;
+            }
+        }
+        #endregion
+
         #region 属性
 
         private ProductParameters _productParameters = new ProductParameters();
@@ -179,6 +433,36 @@ namespace TwistingMachine.ViewModels
         {
             get { return _frontBackColors; }
             set { SetProperty(ref _frontBackColors, value); }
+        }
+
+        private List<System.Windows.Shapes.Path> _leftLineList = new List<System.Windows.Shapes.Path>();
+        /// <summary>
+        /// 左侧线段列表
+        /// </summary>
+        public List<System.Windows.Shapes.Path> LeftLineList
+        {
+            get { return _leftLineList; }
+            set { SetProperty(ref _leftLineList, value); }
+        }
+
+        private List<System.Windows.Shapes.Path> _lineList = new List<System.Windows.Shapes.Path>();
+        /// <summary>
+        /// 中间绞合线段列表
+        /// </summary>
+        public List<System.Windows.Shapes.Path> LineList
+        {
+            get { return _lineList; }
+            set { SetProperty(ref _lineList, value); }
+        }
+
+        private List<System.Windows.Shapes.Path> _rightLineList = new List<System.Windows.Shapes.Path>();
+        /// <summary>
+        /// 右侧线段列表
+        /// </summary>
+        public List<System.Windows.Shapes.Path> RightLineList
+        {
+            get { return _rightLineList; }
+            set { SetProperty(ref _rightLineList, value); }
         }
 
         /// <summary>
