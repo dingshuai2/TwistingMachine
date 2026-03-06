@@ -23,9 +23,9 @@ namespace TwistingMachine.Entities
         /// <summary>
         /// 胶带模式
         /// </summary>
-        private string? _tapeMode;
-        [SugarColumn(ColumnName = "tape_mode", ColumnDataType = "NVARCHAR(50)", IsNullable = true)]
-        public string? TapeMode
+        private int _tapeMode;
+        [SugarColumn(ColumnName = "tape_mode", ColumnDataType = "INTEGER", IsNullable = true)]
+        public int TapeMode
         {
             get => _tapeMode;
             set => SetProperty(ref _tapeMode, value);
@@ -188,9 +188,9 @@ namespace TwistingMachine.Entities
         /// <summary>
         /// 绞合方向
         /// </summary>
-        private string? _twistDirection;
-        [SugarColumn(ColumnName = "twist_direction", ColumnDataType = "NVARCHAR(50)", IsNullable = true)]
-        public string? TwistDirection
+        private int _twistDirection;
+        [SugarColumn(ColumnName = "twist_direction", ColumnDataType = "INTEGER", IsNullable = true)]
+        public int TwistDirection
         {
             get => _twistDirection;
             set => SetProperty(ref _twistDirection, value);

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using MahApps.Metro.IconPacks;
 using TwistingMachine.Entities;
 using TwistingMachine.DbHelpers;
+using System.Collections.Generic;
 
 namespace TwistingMachine.ViewModels
 {
@@ -14,6 +15,21 @@ namespace TwistingMachine.ViewModels
             LoosenJawsCommand = new DelegateCommand(LoosenJaws);
             ResetCommand = new DelegateCommand(Reset);
             ApplyTapeCommand = new DelegateCommand(ApplyTape);
+
+            // 初始化胶带模式下拉框数据源
+            TapeModeOptions = new Dictionary<int, string>
+            {
+                { 1, "选项1" },
+                { 2, "选项2" },
+                { 3, "选项3" }
+            };
+
+            // 初始化绞合方向下拉框数据源
+            TwistDirectionOptions = new Dictionary<int, string>
+            {
+                { 1, "顺时针" },
+                { 2, "逆时针" }
+            };
 
             LoadParametersFromDatabase();
         }
@@ -78,6 +94,26 @@ namespace TwistingMachine.ViewModels
             set { SetProperty(ref _productParameters, value); }
         }
 
+        /// <summary>
+        /// 胶带模式下拉框数据源
+        /// </summary>
+        private Dictionary<int, string> _tapeModeOptions;
+        public Dictionary<int, string> TapeModeOptions
+        {
+            get { return _tapeModeOptions; }
+            set { SetProperty(ref _tapeModeOptions, value); }
+        }
+
+        /// <summary>
+        /// 绞合方向下拉框数据源
+        /// </summary>
+        private Dictionary<int, string> _twistDirectionOptions;
+        public Dictionary<int, string> TwistDirectionOptions
+        {
+            get { return _twistDirectionOptions; }
+            set { SetProperty(ref _twistDirectionOptions, value); }
+        }
+
         private string _wire1Color = "Green";
         public string Wire1Color
         {
@@ -138,60 +174,11 @@ namespace TwistingMachine.ViewModels
 
         #region 前后选择区方块颜色
 
-        private string _frontBackColor1 = "LightGray";
-        public string FrontBackColor1
+        private FrontBackColors _frontBackColors = new FrontBackColors();
+        public FrontBackColors FrontBackColors
         {
-            get { return _frontBackColor1; }
-            set { SetProperty(ref _frontBackColor1, value); }
-        }
-
-        private string _frontBackColor2 = "LightGray";
-        public string FrontBackColor2
-        {
-            get { return _frontBackColor2; }
-            set { SetProperty(ref _frontBackColor2, value); }
-        }
-
-        private string _frontBackColor3 = "LightGray";
-        public string FrontBackColor3
-        {
-            get { return _frontBackColor3; }
-            set { SetProperty(ref _frontBackColor3, value); }
-        }
-
-        private string _frontBackColor4 = "LightGray";
-        public string FrontBackColor4
-        {
-            get { return _frontBackColor4; }
-            set { SetProperty(ref _frontBackColor4, value); }
-        }
-
-        private string _frontBackColor5 = "LightGray";
-        public string FrontBackColor5
-        {
-            get { return _frontBackColor5; }
-            set { SetProperty(ref _frontBackColor5, value); }
-        }
-
-        private string _frontBackColor6 = "LightGray";
-        public string FrontBackColor6
-        {
-            get { return _frontBackColor6; }
-            set { SetProperty(ref _frontBackColor6, value); }
-        }
-
-        private string _frontBackColor7 = "LightGray";
-        public string FrontBackColor7
-        {
-            get { return _frontBackColor7; }
-            set { SetProperty(ref _frontBackColor7, value); }
-        }
-
-        private string _frontBackColor8 = "LightGray";
-        public string FrontBackColor8
-        {
-            get { return _frontBackColor8; }
-            set { SetProperty(ref _frontBackColor8, value); }
+            get { return _frontBackColors; }
+            set { SetProperty(ref _frontBackColors, value); }
         }
 
         #endregion

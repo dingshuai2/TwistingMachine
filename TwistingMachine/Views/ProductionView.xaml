@@ -64,13 +64,10 @@
 
                     <!-- 第一行 -->
                     <TextBlock Grid.Column="0" Text="胶带模式:" VerticalAlignment="Center" FontSize="16"/>
-                    <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="200" Height="35" FontSize="16" HorizontalAlignment="Left">
-                        <ComboBoxItem Content="选项1"/>
-                        <ComboBoxItem Content="选项2"/>
-                        <ComboBoxItem Content="选项3"/>
-                    </ComboBox>
+                    <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="200" Height="30" FontSize="16" HorizontalAlignment="Left" 
+                              ItemsSource="{Binding TapeModeOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TapeMode}" />
                     <TextBlock Grid.Column="3" Text="配方名称：" VerticalAlignment="Center" FontSize="16"/>
-                    <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Width="200" Height="35" HorizontalAlignment="Left" Text="{Binding ProductParameters.RecipeName}" FontSize="16"/>
+                    <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Width="200" Height="30" HorizontalAlignment="Left" Text="{Binding ProductParameters.RecipeName}" FontSize="16"/>
 
                     <!-- 第二行 -->
                     <Grid Grid.Row="1" Grid.ColumnSpan="7">
@@ -82,21 +79,21 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="线芯面积" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.CoreArea}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.CoreArea}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm²" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="左端开口" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.LeftEndOpening}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.LeftEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="线前长度" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.WireFrontLength}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.WireFrontLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
@@ -112,21 +109,21 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="导线外径" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.WireOuterDiameter}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.WireOuterDiameter}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="右端开口" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.RightEndOpening}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.RightEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="大拉气压" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.LargePullPressure}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.LargePullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="Mpa" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
@@ -142,21 +139,21 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="绞后长度" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.TwistedLength}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.TwistedLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="过绞合量" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.OverTwistAmount}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.OverTwistAmount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="%" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="小拉气压" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.SmallPullPressure}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.SmallPullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="Mpa" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
@@ -172,21 +169,21 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="绞合节距" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.TwistPitch}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.TwistPitch}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="绞线缆数" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.TwistWireCount}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.TwistWireCount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="根" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="修正系数" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.CorrectionFactor}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.CorrectionFactor}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
@@ -201,17 +198,15 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="节距补偿" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Text="{Binding ProductParameters.PitchCompensation}" FontSize="16"/>
+                                <TextBox Width="70" Height="28" Text="{Binding ProductParameters.PitchCompensation}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                                 <TextBlock Text="mm" Margin="5,0,0,0" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="绞合方向" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <ComboBox Width="100" Height="30" SelectedIndex="0" FontSize="16">
-                                    <ComboBoxItem Content="正"/>
-                                    <ComboBoxItem Content="反"/>
-                                </ComboBox>
+                                <ComboBox Width="100" Height="30" FontSize="16" 
+                                          ItemsSource="{Binding TwistDirectionOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TwistDirection}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
@@ -220,7 +215,7 @@
 
                     <!--第七行-->
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="设定生产数量：" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="16"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="30" Text="{Binding ProductParameters.SetProductionQuantity}" Margin="0,0,0,0" FontSize="16"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="28" Text="{Binding ProductParameters.SetProductionQuantity}" Margin="0,0,0,0" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                 </Grid>
             </GroupBox>
 
@@ -249,16 +244,16 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor1}"/>
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor2}"/>
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor3}"/>
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor4}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor1}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor2}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor3}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor4}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor5}"/>
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor6}"/>
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor7}"/>
-                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColor8}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor5}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor6}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor7}"/>
+                            <Rectangle Width="40" Height="40" Margin="5" Fill="{Binding FrontBackColors.FrontBackColor8}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
