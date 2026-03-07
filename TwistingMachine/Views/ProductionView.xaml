@@ -47,7 +47,7 @@
                 </Canvas>
 
                 <!-- 黑色矩形：用于固定或标记绞线的两端 -->
-                <Canvas Width="480" Height="100">
+                <Canvas Width="480" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <!-- 左侧黑色矩形 -->
                     <Rectangle Width="45" Height="35" Canvas.Left="0" Canvas.Top="35">
                         <!-- 线性渐变填充：从上至下，上下黑，中间亮，创建立体感 -->
@@ -73,7 +73,7 @@
                         <Rectangle.StrokeThickness>1</Rectangle.StrokeThickness>
                     </Rectangle>
                     <!-- 右侧黑色矩形 -->
-                    <Rectangle Width="45" Height="35" Canvas.Left="450" Canvas.Top="35">
+                    <Rectangle Width="45" Height="35" Canvas.Right="0" Canvas.Top="35">
                         <!-- 线性渐变填充：从上至下，上下黑，中间亮，创建立体感 -->
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

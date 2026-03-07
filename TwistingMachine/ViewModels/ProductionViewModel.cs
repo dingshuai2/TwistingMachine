@@ -66,7 +66,7 @@ namespace TwistingMachine.ViewModels
                 // 初始化线缆绘制
                 var wire1 = new ProductWireTwisPairInfo
                 {
-                    ShowWireDiam = 10, // 线缆1显示直径
+                    ShowWireDiam = 13, // 线缆1显示直径
                     ColorStroke = Colors.Blue, // 线缆1颜色（左侧和右侧）
                     ColorStroke1 = Colors.Blue, // 线缆1颜色（中间绞合部分）
                     ColorStroke2 = Colors.Blue // 线缆1颜色（中间绞合部分）
@@ -74,7 +74,7 @@ namespace TwistingMachine.ViewModels
 
                 var wire2 = new ProductWireTwisPairInfo
                 {
-                    ShowWireDiam = 10, // 线缆2显示直径
+                    ShowWireDiam = 13, // 线缆2显示直径
                     ColorStroke = Colors.Green, // 线缆2颜色（左侧和右侧）
                     ColorStroke1 = Colors.Green, // 线缆2颜色（中间绞合部分）
                     ColorStroke2 = Colors.Green // 线缆2颜色（中间绞合部分）
@@ -161,6 +161,16 @@ namespace TwistingMachine.ViewModels
                 double firstLineLen = threadResidueW + threadResidueW2 + lineLen; //线左侧+线长
 
                 #region 线头（直线）
+                //线1左侧线芯（中线以上）
+                double coreDiameter = wireParam1.ShowWireDiam / 2; //线芯直径为线缆1显示直径的一半
+                double coreLength = 20; //线芯长度
+                System.Windows.Shapes.Path line1LCorePath = PaintLine(new List<Point> { new Point(leftStartX - coreLength, y1), new Point(leftStartX, y1) }, new SolidColorBrush(Colors.Brown), coreDiameter);
+                LeftLineList.Add(line1LCorePath);
+                
+                //线2左侧线芯（中线以下）
+                System.Windows.Shapes.Path line2LCorePath = PaintLine(new List<Point> { new Point(leftStartX - coreLength, y2 + threadResidueH * 2), new Point(leftStartX, y2 + threadResidueH * 2) }, new SolidColorBrush(Colors.Brown), coreDiameter);
+                LeftLineList.Add(line2LCorePath);
+                
                 //线1左侧直线（中线以上）
                 if (wireParam1.ColorStroke == Colors.White) //白线追加显示黑边
                 {
@@ -171,6 +181,16 @@ namespace TwistingMachine.ViewModels
                 LeftLineList.Add(line1LMainPath);
                 System.Windows.Shapes.Path line1LSubPath = PaintLine(new List<Point> { new Point(leftStartX, y1), new Point(leftStartX + threadResidueW, y1) }, new SolidColorBrush(wireParam2.ColorStroke), line1ShowDiam);
                 LeftLineList.Add(line1LSubPath);
+                //线1右侧线芯（中线以下）
+                double rightStartX = leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW;
+                double rightEndX = leftStartX + threadResidueW + threadResidueW2 + lineLen + threadResidueW * 2; //右侧直线的终点
+                System.Windows.Shapes.Path line1RCorePath = PaintLine(new List<Point> { new Point(rightEndX, y2 + threadResidueH * 2), new Point(rightEndX + coreLength, y2 + threadResidueH * 2) }, new SolidColorBrush(Colors.Brown), coreDiameter);
+                RightLineList.Add(line1RCorePath);
+                
+                //线2右侧线芯（中线以上）
+                System.Windows.Shapes.Path line2RCorePath = PaintLine(new List<Point> { new Point(rightEndX, y1), new Point(rightEndX + coreLength, y1) }, new SolidColorBrush(Colors.Brown), coreDiameter);
+                RightLineList.Add(line2RCorePath);
+                
                 //线1右侧直线（中线以下）
                 if (wireParam1.ColorStroke == Colors.White) //白线追加显示黑边
                 {
