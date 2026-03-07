@@ -4,7 +4,7 @@ using System.Windows.Input;
 using TwistingMachine.Entities.Data;
 using System.Windows;
 
-namespace TwistingMachine.Dialogs
+namespace TwistingMachine.Dialogs.ViewModels
 {
     public class RecipeEditDialogViewModel : BindableBase
     {

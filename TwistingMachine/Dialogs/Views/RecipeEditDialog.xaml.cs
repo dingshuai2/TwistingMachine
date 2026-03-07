@@ -1,7 +1,7 @@
 using MahApps.Metro.Controls;
 using TwistingMachine.Entities.Data;
 
-namespace TwistingMachine.Dialogs
+namespace TwistingMachine.Dialogs.Views
 {
     /// <summary>
     /// RecipeEditDialog.xaml 的交互逻辑

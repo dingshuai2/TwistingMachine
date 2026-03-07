@@ -17,7 +17,6 @@ namespace TwistingMachine.ViewModels
         {
             CloseCommand = new DelegateCommand(Close);
             MinimizeCommand = new DelegateCommand(Minimize);
-            OpenTestDialogCommand = new DelegateCommand(OpenTestDialog);
 
             //初始化导航栏
             PageViewModels = new ObservableCollection<BindableBase>
@@ -31,22 +30,6 @@ namespace TwistingMachine.ViewModels
             };
 
             CurrentViewModel = PageViewModels.First();
-        }
-
-        private void OpenTestDialog()
-        {
-            try
-            {
-                MetroWindow? wd = Application.Current.MainWindow as MetroWindow;
-                var dlg = new TestDialog(wd);
-                TestDialogViewModel dlgModel = new TestDialogViewModel();
-                dlg.DataContext = dlgModel;
-                dlg.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"打开测试弹窗出错：{ex.Message}");
-            }
         }
 
         /// <summary>
@@ -85,7 +68,7 @@ namespace TwistingMachine.ViewModels
 
         public ICommand CloseCommand { get; private set; }
         public ICommand MinimizeCommand { get; private set; }
-        public ICommand OpenTestDialogCommand { get; private set; }
+
         #endregion
     }
 }
