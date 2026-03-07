@@ -1,5 +1,6 @@
 using SqlSugar;
 using TwistingMachine.Entities;
+using TwistingMachine.Entities.Data;
 
 namespace TwistingMachine.DbHelpers
 {

@@ -1,43 +1,19 @@
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Collections.Generic;
+using System.Text;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows.Input;
 using MahApps.Metro.IconPacks;
-using TwistingMachine.Entities;
 using TwistingMachine.DbHelpers;
-using System.Collections.Generic;
+using TwistingMachine.Entities;
+using TwistingMachine.Entities.Data;
 using Serilog;
-using System.Windows.Media;
-using System.Windows;
-using System.Text;
 
 namespace TwistingMachine.ViewModels
 {
-    /// <summary>
-    /// 绞线参数类
-    /// </summary>
-    public class ProductWireTwisPairInfo
-    {
-        /// <summary>
-        /// 显示线径
-        /// </summary>
-        public double ShowWireDiam { get; set; }
-
-        /// <summary>
-        /// 线颜色(左右两端的线的颜色)
-        /// </summary>
-        public Color ColorStroke { get; set; }
-
-        /// <summary>
-        /// 线颜色1
-        /// </summary>
-        public Color ColorStroke1 { get; set; }
-
-        /// <summary>
-        /// 线颜色2
-        /// </summary>
-        public Color ColorStroke2 { get; set; }
-    }
-
     public class ProductionViewModel : BindableBase
     {
         public ProductionViewModel()

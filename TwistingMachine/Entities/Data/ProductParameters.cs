@@ -3,7 +3,7 @@ using Prism.Mvvm;
 using TwistingMachine.DbHelpers;
 using Serilog;
 
-namespace TwistingMachine.Entities
+namespace TwistingMachine.Entities.Data
 {
     /// <summary>
     /// 产品参数实体类
