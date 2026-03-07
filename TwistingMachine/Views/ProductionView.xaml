@@ -45,6 +45,58 @@
                         </ItemsControl>
                     </StackPanel>
                 </Canvas>
+
+                <!-- 黑色矩形：用于固定或标记绞线的两端 -->
+                <Canvas Width="480" Height="100">
+                    <!-- 左侧黑色矩形 -->
+                    <Rectangle Width="45" Height="35" Canvas.Left="0" Canvas.Top="35">
+                        <!-- 线性渐变填充：从上至下，上下黑，中间亮，创建立体感 -->
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#000000" Offset="0"/>
+                                <GradientStop Color="#444444" Offset="0.5"/>
+                                <GradientStop Color="#000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <!-- 阴影效果：增强立体感，使矩形看起来悬浮在表面之上 -->
+                        <Rectangle.Effect>
+                            <DropShadowEffect Color="#000000" Direction="270" BlurRadius="2" ShadowDepth="1"/>
+                        </Rectangle.Effect>
+                        <!-- 线性渐变描边：从上至下，上下黑，中间亮，增强边缘清晰度 -->
+                        <Rectangle.Stroke>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#000000" Offset="0"/>
+                                <GradientStop Color="#666666" Offset="0.5"/>
+                                <GradientStop Color="#000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Stroke>
+                        <Rectangle.StrokeThickness>1</Rectangle.StrokeThickness>
+                    </Rectangle>
+                    <!-- 右侧黑色矩形 -->
+                    <Rectangle Width="45" Height="35" Canvas.Left="450" Canvas.Top="35">
+                        <!-- 线性渐变填充：从上至下，上下黑，中间亮，创建立体感 -->
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#000000" Offset="0"/>
+                                <GradientStop Color="#444444" Offset="0.5"/>
+                                <GradientStop Color="#000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <!-- 阴影效果：增强立体感，使矩形看起来悬浮在表面之上 -->
+                        <Rectangle.Effect>
+                            <DropShadowEffect Color="#000000" Direction="270" BlurRadius="2" ShadowDepth="1"/>
+                        </Rectangle.Effect>
+                        <!-- 线性渐变描边：从上至下，上下黑，中间亮，增强边缘清晰度 -->
+                        <Rectangle.Stroke>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#000000" Offset="0"/>
+                                <GradientStop Color="#666666" Offset="0.5"/>
+                                <GradientStop Color="#000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Stroke>
+                        <Rectangle.StrokeThickness>1</Rectangle.StrokeThickness>
+                    </Rectangle>
+                </Canvas>
             </Grid>
         </GroupBox>
 

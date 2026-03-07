@@ -53,6 +53,13 @@ namespace TwistingMachine.ViewModels
         /// <summary>
         /// 加载参数
         /// </summary>
+        /// <remarks>
+        /// 此方法负责加载产品参数，并初始化相关数据
+        /// 1. 初始化胶带模式下拉框数据源
+        /// 2. 初始化绞合方向下拉框数据源
+        /// 3. 从数据库加载产品参数
+        /// 4. 初始化线缆绘制
+        /// </remarks>
         private void LoadParametersFromDatabase()
         {
             try
@@ -72,6 +79,7 @@ namespace TwistingMachine.ViewModels
                     { 2, "逆时针" }
                 };
 
+                // 从数据库加载产品参数
                 var param = DbManager.Inst.QueryDatas<ProductParameters>().Where(p => p.RecipeName == "AAA").First();
 
                 if (param != null)
@@ -82,43 +90,27 @@ namespace TwistingMachine.ViewModels
                 // 初始化线缆绘制
                 var wire1 = new ProductWireTwisPairInfo
                 {
-                    ShowWireDiam = 10,
-                    ColorStroke = Colors.Blue,
-                    ColorStroke1 = Colors.Blue,
-                    ColorStroke2 = Colors.Blue
+                    ShowWireDiam = 10, // 线缆1显示直径
+                    ColorStroke = Colors.Blue, // 线缆1颜色（左侧和右侧）
+                    ColorStroke1 = Colors.Blue, // 线缆1颜色（中间绞合部分）
+                    ColorStroke2 = Colors.Blue // 线缆1颜色（中间绞合部分）
                 };
 
                 var wire2 = new ProductWireTwisPairInfo
                 {
-                    ShowWireDiam = 10,
-                    ColorStroke = Colors.Green,
-                    ColorStroke1 = Colors.Green,
-                    ColorStroke2 = Colors.Green
+                    ShowWireDiam = 10, // 线缆2显示直径
+                    ColorStroke = Colors.Green, // 线缆2颜色（左侧和右侧）
+                    ColorStroke1 = Colors.Green, // 线缆2颜色（中间绞合部分）
+                    ColorStroke2 = Colors.Green // 线缆2颜色（中间绞合部分）
                 };
 
+                // 绘制双绞线缆
                 DrawTwistedPair(wire1, wire2);
             }
             catch (Exception ex)
             {
                 Serilog.Log.Error($"ProductionViewModel:当前生产界面产品参数加载参数失败：{ex.Message}");
             }
-        }
-
-        private string _title = "正在生产";
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
-        private PackIconMaterialKind _iconKind = PackIconMaterialKind.Home;
-        /// <summary>
-        /// 导航图标
-        /// </summary>
-        public PackIconMaterialKind IconKind
-        {
-            get { return _iconKind; }
-            set { SetProperty(ref _iconKind, value); }
         }
 
         #region 方法
@@ -167,10 +159,10 @@ namespace TwistingMachine.ViewModels
 
         #region 画线
         /// <summary>
-        /// 画双绞线缆
+        /// 绘制双绞线缆
         /// </summary>
-        /// <param name="wireParam1">线1参数</param>
-        /// <param name="wireParam2">线2参数</param>
+        /// <param name="wireParam1">线缆1参数</param>
+        /// <param name="wireParam2">线缆2参数</param>
         private void DrawTwistedPair(ProductWireTwisPairInfo wireParam1, ProductWireTwisPairInfo wireParam2)
         {
             try
@@ -180,6 +172,7 @@ namespace TwistingMachine.ViewModels
                 LineList.Clear();
                 RightLineList.Clear();
 
+                // 定义绘制参数
                 double leftStartX = 0; //左侧起始X位置
                 double threadResidueW = 80; //线头宽度（直线）
                 double threadResidueW2 = 80; //线头宽度（曲线）
@@ -187,8 +180,8 @@ namespace TwistingMachine.ViewModels
                 double lineLen = 480; //线长
                 double y1 = 5; //上起始位置1
                 double y2 = Math.Max(wireParam1.ShowWireDiam, wireParam2.ShowWireDiam) + 10; //上起始位置2
-                double line1ShowDiam = wireParam1.ColorStroke != Colors.White ? wireParam1.ShowWireDiam : wireParam1.ShowWireDiam + 2;
-                double line2ShowDiam = wireParam2.ColorStroke != Colors.White ? wireParam2.ShowWireDiam : wireParam2.ShowWireDiam + 2;
+                double line1ShowDiam = wireParam1.ColorStroke != Colors.White ? wireParam1.ShowWireDiam : wireParam1.ShowWireDiam + 2; //线1显示直径（白线加粗）
+                double line2ShowDiam = wireParam2.ColorStroke != Colors.White ? wireParam2.ShowWireDiam : wireParam2.ShowWireDiam + 2; //线2显示直径（白线加粗）
                 double firstLineLen = threadResidueW + threadResidueW2 + lineLen; //线左侧+线长
 
                 #region 线头（直线）
@@ -341,25 +334,36 @@ namespace TwistingMachine.ViewModels
         /// <param name="points">点集合</param>
         /// <param name="brush">线颜色</param>
         /// <param name="thickness">线粗</param>
-        /// <returns></returns>
+        /// <returns>绘制好的路径</returns>
+        /// <remarks>
+        /// 此方法使用贝塞尔曲线绘制线条，通过控制点创建平滑的曲线
+        /// 控制点计算：使用两点之间的中点作为水平控制点
+        /// </remarks>
         private System.Windows.Shapes.Path PaintLine(List<Point> points, Brush brush, double thickness = 8)
         {
             try
             {
+                // 至少需要两个点才能绘制曲线
                 if (points.Count < 2)
                     return null;
 
-                StringBuilder data = new StringBuilder("M");
+                // 构建路径数据
+                StringBuilder data = new StringBuilder("M"); // 移动到起点
                 data.AppendFormat(" {0},{1}", points[0].X, points[0].Y);
 
+                // 绘制贝塞尔曲线
                 for (int i = 1; i < points.Count; i++)
                 {
+                    // 计算控制点：使用两点之间的中点作为水平控制点
                     double midX = (points[i - 1].X + points[i].X) / 2;
-                    Point control1 = new Point(midX, points[i - 1].Y);
-                    Point control2 = new Point(midX, points[i].Y);
+                    Point control1 = new Point(midX, points[i - 1].Y); // 第一个控制点
+                    Point control2 = new Point(midX, points[i].Y); // 第二个控制点
+                    
+                    // 添加贝塞尔曲线段
                     data.AppendFormat(" C {0},{1} {2},{3} {4},{5}", control1.X, control1.Y, control2.X, control2.Y, points[i].X, points[i].Y);
                 }
 
+                // 创建并返回路径
                 return new System.Windows.Shapes.Path { Stroke = brush, StrokeThickness = thickness, Data = Geometry.Parse(data.ToString()) };
             }
             catch (Exception ex)
@@ -465,26 +469,21 @@ namespace TwistingMachine.ViewModels
             set { SetProperty(ref _rightLineList, value); }
         }
 
-        /// <summary>
-        /// 绞线路径
-        /// </summary>
-        public string Wire1Path
+        private string _title = "正在生产";
+        public string Title
         {
-            get
-            {
-                return "M 50,40 C 100,20 150,60 200,40 C 250,20 300,60 350,40 C 400,20 450,60 500,40";
-            }
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
+        private PackIconMaterialKind _iconKind = PackIconMaterialKind.Home;
         /// <summary>
-        /// 绞线路径
+        /// 导航图标
         /// </summary>
-        public string Wire2Path
+        public PackIconMaterialKind IconKind
         {
-            get
-            {
-                return "M 50,50 C 100,70 150,30 200,50 C 250,70 300,30 350,50 C 400,70 450,30 500,50";
-            }
+            get { return _iconKind; }
+            set { SetProperty(ref _iconKind, value); }
         }
 
         #endregion
