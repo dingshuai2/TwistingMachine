@@ -8,7 +8,7 @@
                       prism:ViewModelLocator.AutoWireViewModel="True"
                       mc:Ignorable="d"
                       Title="编辑配方"
-                      Width="400" Height="400"
+                      Width="850" Height="650"
                       WindowStartupLocation="CenterOwner"
                       ShowCloseButton="True" ShowMinButton="False" ShowMaxRestoreButton="False"
                       ShowInTaskbar="False">
@@ -27,9 +27,7 @@
         <!-- 编辑内容 -->
         <Grid Grid.Row="1" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
@@ -37,52 +35,120 @@
             </Grid.RowDefinitions>
 
             <!-- 配方名称 -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="配方名称" Width="100" FontSize="14"/>
-                <TextBox Width="200" Height="25" Text="{Binding Recipe.RecipeName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
-            </StackPanel>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="配方名称" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="1" Width="200" Height="25" Text="{Binding Recipe.RecipeName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+            </Grid>
 
-            <!-- 线芯面积 -->
-            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="线芯面积" Width="100" FontSize="14"/>
-                <TextBox Width="80" Height="25" Text="{Binding Recipe.CoreArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
-                <TextBlock Text="mm²" Margin="5,0,0,0" FontSize="14"/>
-            </StackPanel>
+            <!-- 第一行 -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="线芯面积" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="1" Width="80" Height="25" Text="{Binding Recipe.CoreArea, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="mm²" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="3" Text="左开口" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="4" Width="80" Height="25" Text="{Binding Recipe.LeftEndOpening, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="5" Text="mm" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="6" Text="导线外径" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="7" Width="80" Height="25" Text="{Binding Recipe.WireOuterDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="8" Text="mm" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="9" Text="右开口" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="10" Width="80" Height="25" Text="{Binding Recipe.RightEndOpening, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="11" Text="mm" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            </Grid>
 
-            <!-- 导线外径 -->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="导线外径" Width="100" FontSize="14"/>
-                <TextBox Width="80" Height="25" Text="{Binding Recipe.WireOuterDiameter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
-                <TextBlock Text="mm" Margin="5,0,0,0" FontSize="14"/>
-            </StackPanel>
+            <!-- 第二行 -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="绞后长度" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="1" Width="80" Height="25" Text="{Binding Recipe.TwistedLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="mm" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="3" Text="过绞量" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="4" Width="80" Height="25" Text="{Binding Recipe.OverTwistAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="5" Text="%" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="6" Text="线前长度" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="7" Width="80" Height="25" Text="{Binding Recipe.WireFrontLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="8" Text="mm" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="9" Text="绞线缆数" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="10" Width="80" Height="25" Text="{Binding Recipe.TwistWireCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+            </Grid>
 
-            <!-- 绞后长度 -->
-            <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="绞后长度" Width="100" FontSize="14"/>
-                <TextBox Width="80" Height="25" Text="{Binding Recipe.TwistedLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
-                <TextBlock Text="mm" Margin="5,0,0,0" FontSize="14"/>
-            </StackPanel>
+            <!-- 第三行 -->
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="大拉气压" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="1" Width="80" Height="25" Text="{Binding Recipe.LargePullPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="MPa" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="3" Text="小拉气压" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="4" Width="80" Height="25" Text="{Binding Recipe.SmallPullPressure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="5" Text="MPa" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="6" Text="绞合节距" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="7" Width="80" Height="25" Text="{Binding Recipe.TwistPitch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="8" Text="mm" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="9" Text="修正系数" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBox Grid.Column="10" Width="80" Height="25" Text="{Binding Recipe.CorrectionFactor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+            </Grid>
 
-            <!-- 左开口 -->
-            <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="左开口" Width="100" FontSize="14"/>
-                <TextBox Width="80" Height="25" Text="{Binding Recipe.LeftEndOpening, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
-                <TextBlock Text="mm" Margin="5,0,0,0" FontSize="14"/>
-            </StackPanel>
-
-            <!-- 右开口 -->
-            <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="右开口" Width="100" FontSize="14"/>
-                <TextBox Width="80" Height="25" Text="{Binding Recipe.RightEndOpening, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
-                <TextBlock Text="mm" Margin="5,0,0,0" FontSize="14"/>
-            </StackPanel>
-
-            <!-- 过绞量 -->
-            <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="过绞量" Width="100" FontSize="14"/>
-                <TextBox Width="80" Height="25" Text="{Binding Recipe.OverTwistAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
-                <TextBlock Text="%" Margin="5,0,0,0" FontSize="14"/>
-            </StackPanel>
+            <!-- 第四行 -->
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="节距补偿" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <TextBlock Grid.Column="2" Text="mm" FontSize="14" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBox Grid.Column="1" Width="80" Height="25" Text="{Binding Recipe.PitchCompensation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="3" Text="绞合方向" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <ComboBox Grid.Column="4" Width="80" Height="25" FontSize="14" 
+                          ItemsSource="{Binding TwistDirectionOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding Recipe.TwistDirection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+            </Grid>
         </Grid>
 
         <!-- 按钮 -->

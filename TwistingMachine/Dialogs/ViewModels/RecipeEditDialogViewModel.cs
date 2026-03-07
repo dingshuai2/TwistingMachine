@@ -3,6 +3,7 @@ using Prism.Commands;
 using System.Windows.Input;
 using TwistingMachine.Entities.Data;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace TwistingMachine.Dialogs.ViewModels
 {
@@ -17,12 +18,27 @@ namespace TwistingMachine.Dialogs.ViewModels
 
         private Window _dialog;
 
+        // 绞合方向选项
+        private Dictionary<int, string> _twistDirectionOptions;
+        public Dictionary<int, string> TwistDirectionOptions
+        {
+            get { return _twistDirectionOptions; }
+            set { SetProperty(ref _twistDirectionOptions, value); }
+        }
+
         public RecipeEditDialogViewModel(ProductParameters recipe, Window dialog)
         {
             Recipe = recipe;
             _dialog = dialog;
             SaveCommand = new DelegateCommand(Save);
             CancelCommand = new DelegateCommand(Cancel);
+
+            // 初始化绞合方向选项
+            TwistDirectionOptions = new Dictionary<int, string>
+            {
+                { 1, "顺时针" },
+                { 2, "逆时针" }
+            };
         }
 
         private void Save()
