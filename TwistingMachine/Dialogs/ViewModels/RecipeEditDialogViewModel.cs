@@ -59,6 +59,17 @@ namespace TwistingMachine.Dialogs.ViewModels
 
         private void Save()
         {
+            // 检查配方名是否重复
+            var allRecipes = DbManager.Inst.QueryDatas<ProductParameters>();
+            bool isDuplicate = allRecipes.Any(r => r.RecipeName == Recipe.RecipeName && r.Id != Recipe.Id);
+            
+            if (isDuplicate)
+            {
+                // 配方名重复，显示错误信息
+                MessageBox.Show("配方名已存在，请使用其他名称！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
             // 保存修改到数据库
             bool success = DbManager.Inst.UpdateData(Recipe);
             if (success)

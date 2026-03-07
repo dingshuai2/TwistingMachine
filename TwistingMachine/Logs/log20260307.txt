@@ -121,3 +121,5 @@
 2026-03-07 18:20:19.876 +08:00 [ERR] ProductionViewModel:当前生产界面产品参数加载参数失败：Sequence contains no elements
 2026-03-07 18:28:52.269 +08:00 [ERR] ProductionViewModel:当前生产界面产品参数加载参数失败：Sequence contains no elements
 2026-03-07 18:28:52.897 +08:00 [ERR] ProductionViewModel:当前生产界面产品参数加载参数失败：Sequence contains no elements
+2026-03-07 18:42:20.514 +08:00 [ERR] ProductionViewModel:当前生产界面产品参数加载参数失败：Sequence contains no elements
+2026-03-07 18:42:21.133 +08:00 [ERR] ProductionViewModel:当前生产界面产品参数加载参数失败：Sequence contains no elements
