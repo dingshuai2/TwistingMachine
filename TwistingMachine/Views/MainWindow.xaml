@@ -1,4 +1,4 @@
-<Controls:MetroWindow x:Class="TwistingMachine.Views.MainWindow"
+<MetroControls:MetroWindow x:Class="TwistingMachine.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:viewModels="clr-namespace:TwistingMachine.ViewModels"
         xmlns:views="clr-namespace:TwistingMachine.Views"
-        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:MetroControls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
@@ -15,7 +15,7 @@
         Background="White"
         ShowCloseButton="False" ShowMinButton="False" ShowMaxRestoreButton="False"
         TitleBarHeight="0" BorderThickness="0">
-    <Controls:MetroWindow.Resources>
+    <MetroControls:MetroWindow.Resources>
         <!-- 页面数据模板 -->
         <DataTemplate DataType="{x:Type viewModels:ProductionViewModel}">
             <views:ProductionView/>
@@ -92,7 +92,7 @@
         <Style TargetType="TabControl">
             <Setter Property="Template" Value="{StaticResource LeftTabControlTemplate}"/>
         </Style>
-    </Controls:MetroWindow.Resources>
+    </MetroControls:MetroWindow.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -210,4 +210,4 @@
             </Grid>
         </Grid>
     </Grid>
-</Controls:MetroWindow>
+</MetroControls:MetroWindow>
