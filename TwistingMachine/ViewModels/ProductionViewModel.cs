@@ -16,12 +16,15 @@ namespace TwistingMachine.ViewModels
 {
     public class ProductionViewModel : BindableBase
     {
+        public DelegateCommand<object> FocusTextBoxCommand { get; private set; }
+
         public ProductionViewModel()
         {
             LoosenJawsCommand = new DelegateCommand(LoosenJaws);
             ResetCommand = new DelegateCommand(Reset);
             ApplyTapeCommand = new DelegateCommand(ApplyTape);
             SaveParametersCommand = new DelegateCommand(SaveParameters);
+            FocusTextBoxCommand = new DelegateCommand<object>(FocusTextBox);
 
             LoadParametersFromDatabase();
         }
@@ -128,6 +131,19 @@ namespace TwistingMachine.ViewModels
             catch (Exception ex)
             {
                 Serilog.Log.Error($"ProductionViewModel:参数保存失败：{ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 设置文本框焦点
+        /// </summary>
+        /// <param name="textBox">文本框对象</param>
+        private void FocusTextBox(object textBox)
+        {
+            if (textBox is System.Windows.Controls.TextBox tb)
+            {
+                tb.Focus();
+                tb.SelectAll();
             }
         }
 

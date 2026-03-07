@@ -98,7 +98,7 @@
                         <Rectangle.StrokeThickness>1</Rectangle.StrokeThickness>
                     </Rectangle>
                 </Canvas>
-                
+
                 <!--绘制箭头图标-->
                 <!--线长线-->
                 <Border BorderThickness="1,0,1,0" BorderBrush="Black" Margin="0,10,0,0" Width="840" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -132,15 +132,102 @@
                 <Border BorderThickness="0,1,0,0" BorderBrush="Black" Margin="0,0,250,10" Width="150" Height="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 <!--绞距长度线-->
                 <Border BorderThickness="0,1,0,0" BorderBrush="Black" Margin="0,80,0,0" Width="230" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                
+
                 <!--线长输入框-->
-                <TextBox Width="50" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"></TextBox>
+                <Grid Width="50" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+                    <Rectangle Width="40" Height="20" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="LineLengthTextBlock" Text="200" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LineLengthTextBlock}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LineLengthTextBox}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LineLengthTextBox}" PropertyName="Focusable" Value="True"/>
+                                <i:InvokeCommandAction Command="{Binding FocusTextBoxCommand}" CommandParameter="{Binding ElementName=LineLengthTextBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+                    <TextBox x:Name="LineLengthTextBox" Text="200" Width="50" Height="25" Visibility="Collapsed">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LineLengthTextBox}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LineLengthTextBlock}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LineLengthTextBlock}" PropertyName="Text" Value="{Binding ElementName=LineLengthTextBox, Path=Text}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </Grid>
+
                 <!--左开口输入框-->
-                <TextBox Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="300,0,0,5"></TextBox>
+                <Grid Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="300,0,0,5">
+                    <Rectangle Width="40" Height="20" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="LeftOpeningTextBlock" Text="{Binding ProductParameters.LeftEndOpening,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LeftOpeningTextBlock}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LeftOpeningTextBox}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LeftOpeningTextBox}" PropertyName="Focusable" Value="True"/>
+                                <i:InvokeCommandAction Command="{Binding FocusTextBoxCommand}" CommandParameter="{Binding ElementName=LeftOpeningTextBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+                    <TextBox x:Name="LeftOpeningTextBox" Text="{Binding ProductParameters.LeftEndOpening,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" Height="25" Visibility="Collapsed">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LeftOpeningTextBox}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LeftOpeningTextBlock}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=LeftOpeningTextBlock}" PropertyName="Text" Value="{Binding ElementName=LeftOpeningTextBox, Path=Text}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </Grid>
+
                 <!--右开口输入框-->
-                <TextBox Width="50" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,300,5"></TextBox>
+                <Grid Width="50" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,300,5">
+                    <Rectangle Width="40" Height="20" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="RightOpeningTextBlock" Text="{Binding ProductParameters.RightEndOpening,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=RightOpeningTextBlock}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=RightOpeningTextBox}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=RightOpeningTextBox}" PropertyName="Focusable" Value="True"/>
+                                <i:InvokeCommandAction Command="{Binding FocusTextBoxCommand}" CommandParameter="{Binding ElementName=RightOpeningTextBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+                    <TextBox x:Name="RightOpeningTextBox" Text="{Binding ProductParameters.RightEndOpening,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" Height="25" Visibility="Collapsed">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=RightOpeningTextBox}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=RightOpeningTextBlock}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=RightOpeningTextBlock}" PropertyName="Text" Value="{Binding ElementName=RightOpeningTextBox, Path=Text}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </Grid>
+
                 <!--绞距输入框-->
-                <TextBox Width="50" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,0,0"></TextBox>
+                <Grid Width="50" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,0,0">
+                    <Rectangle Width="40" Height="20" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TwistPitchTextBlock" Text="35" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=TwistPitchTextBlock}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=TwistPitchTextBox}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=TwistPitchTextBox}" PropertyName="Focusable" Value="True"/>
+                                <i:InvokeCommandAction Command="{Binding FocusTextBoxCommand}" CommandParameter="{Binding ElementName=TwistPitchTextBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+                    <TextBox x:Name="TwistPitchTextBox" Text="35" Width="50" Height="25" Visibility="Collapsed">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=TwistPitchTextBox}" PropertyName="Visibility" Value="Collapsed"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=TwistPitchTextBlock}" PropertyName="Visibility" Value="Visible"/>
+                                <i:ChangePropertyAction TargetObject="{Binding ElementName=TwistPitchTextBlock}" PropertyName="Text" Value="{Binding ElementName=TwistPitchTextBox, Path=Text}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </Grid>
             </Grid>
         </GroupBox>
 
@@ -176,7 +263,7 @@
                     <!-- 第一行 -->
                     <TextBlock Grid.Column="0" Text="胶带模式:" VerticalAlignment="Center" FontSize="16"/>
                     <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="200" Height="30" FontSize="16" HorizontalAlignment="Left" 
-                              ItemsSource="{Binding TapeModeOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TapeMode}">
+                              ItemsSource="{Binding TapeModeOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TapeMode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -184,7 +271,7 @@
                         </i:Interaction.Triggers>
                     </ComboBox>
                     <TextBlock Grid.Column="3" Text="配方名称：" VerticalAlignment="Center" FontSize="16"/>
-                    <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Width="200" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ProductParameters.RecipeName}" FontSize="16">
+                    <TextBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Width="200" Height="35" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ProductParameters.RecipeName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="LostFocus">
                                 <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -202,7 +289,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="线芯面积" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.CoreArea}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.CoreArea,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -215,7 +302,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="左端开口" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.LeftEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.LeftEndOpening,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -228,7 +315,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="线前长度" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.WireFrontLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.WireFrontLength,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -239,7 +326,7 @@
                             </StackPanel>
                         </StackPanel>
                     </Grid>
-                    
+
                     <!-- 第三行 -->
                     <Grid Grid.Row="2" Grid.ColumnSpan="7">
                         <Grid.ColumnDefinitions>
@@ -250,7 +337,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="导线外径" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.WireOuterDiameter}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.WireOuterDiameter,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -263,7 +350,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="右端开口" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.RightEndOpening}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.RightEndOpening,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -276,7 +363,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="大拉气压" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.LargePullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.LargePullPressure,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -298,7 +385,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="绞后长度" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistedLength}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistedLength,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -311,7 +398,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="过绞合量" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.OverTwistAmount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.OverTwistAmount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -324,7 +411,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="小拉气压" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.SmallPullPressure}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.SmallPullPressure,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -346,7 +433,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="绞合节距" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistPitch}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistPitch,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -359,7 +446,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <TextBlock Text="绞线缆数" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistWireCount}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.TwistWireCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -372,7 +459,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Column="2">
                             <TextBlock Text="修正系数" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.CorrectionFactor}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.CorrectionFactor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -393,7 +480,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="节距补偿" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60,0,0,0">
-                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.PitchCompensation}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                                <TextBox Width="70" Height="25" Text="{Binding ProductParameters.PitchCompensation,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -407,7 +494,7 @@
                             <TextBlock Text="绞合方向" VerticalAlignment="Center" FontSize="16"/>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="60,0,0,0">
                                 <ComboBox Width="100" Height="30" FontSize="16" 
-                                          ItemsSource="{Binding TwistDirectionOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TwistDirection}">
+                                          ItemsSource="{Binding TwistDirectionOptions}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding ProductParameters.TwistDirection,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
@@ -422,7 +509,7 @@
 
                     <!--第七行-->
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="设定生产数量：" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="16"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="25" Text="{Binding ProductParameters.SetProductionQuantity}" Margin="0,0,0,0" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                    <TextBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="25" Text="{Binding ProductParameters.SetProductionQuantity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="LostFocus">
                                 <i:InvokeCommandAction Command="{Binding SaveParametersCommand}"/>
