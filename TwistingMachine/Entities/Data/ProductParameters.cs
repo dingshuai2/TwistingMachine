@@ -9,20 +9,8 @@ namespace TwistingMachine.Entities.Data
     /// 产品参数实体类
     /// </summary>
     [SugarTable("ProductParameters")]
-    public class ProductParameters : BindableBase
+    public class ProductParameters : BaseEntity
     {
-
-
-        /// <summary>
-        /// 主键ID
-        /// </summary>
-        private int _id;
-        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
-        public int Id
-        {
-            get => _id;
-            set => SetProperty(ref _id, value);
-        }
 
         /// <summary>
         /// 胶带模式

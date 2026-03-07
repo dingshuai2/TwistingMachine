@@ -82,6 +82,8 @@ namespace TwistingMachine.ViewModels
                 var dlg = new RecipeEditDialog(wd);
                 dlg.DataContext = new RecipeEditDialogViewModel(SelectedRecipe, dlg);
                 dlg.ShowDialog();
+                // 重新加载配方列表，实现保存后刷新
+                LoadRecipes();
             }
             else
             {
