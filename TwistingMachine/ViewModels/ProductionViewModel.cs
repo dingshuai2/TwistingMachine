@@ -13,7 +13,7 @@ using System.Text;
 namespace TwistingMachine.ViewModels
 {
     /// <summary>
-    /// 线缆参数类
+    /// 绞线参数类
     /// </summary>
     public class ProductWireTwisPairInfo
     {
@@ -23,7 +23,7 @@ namespace TwistingMachine.ViewModels
         public double ShowWireDiam { get; set; }
 
         /// <summary>
-        /// 线颜色
+        /// 线颜色(左右两端的线的颜色)
         /// </summary>
         public Color ColorStroke { get; set; }
 
@@ -47,41 +47,7 @@ namespace TwistingMachine.ViewModels
             ApplyTapeCommand = new DelegateCommand(ApplyTape);
             SaveParametersCommand = new DelegateCommand(SaveParameters);
 
-            // 初始化胶带模式下拉框数据源
-            TapeModeOptions = new Dictionary<int, string>
-            {
-                { 1, "选项1" },
-                { 2, "选项2" },
-                { 3, "选项3" }
-            };
-
-            // 初始化绞合方向下拉框数据源
-            TwistDirectionOptions = new Dictionary<int, string>
-            {
-                { 1, "顺时针" },
-                { 2, "逆时针" }
-            };
-
             LoadParametersFromDatabase();
-
-            // 初始化线缆绘制
-            var wire1 = new ProductWireTwisPairInfo
-            {
-                ShowWireDiam = 10,
-                ColorStroke = Colors.Blue,
-                ColorStroke1 = Colors.Blue,
-                ColorStroke2 = Colors.Blue
-            };
-
-            var wire2 = new ProductWireTwisPairInfo
-            {
-                ShowWireDiam = 10,
-                ColorStroke = Colors.Green,
-                ColorStroke1 = Colors.Green,
-                ColorStroke2 = Colors.Green
-            };
-
-            DrawTwistedPair(wire1, wire2);
         }
 
         /// <summary>
@@ -91,12 +57,46 @@ namespace TwistingMachine.ViewModels
         {
             try
             {
+                // 初始化胶带模式下拉框数据源
+                TapeModeOptions = new Dictionary<int, string>
+                {
+                    { 1, "选项1" },
+                    { 2, "选项2" },
+                    { 3, "选项3" }
+                };
+
+                // 初始化绞合方向下拉框数据源
+                TwistDirectionOptions = new Dictionary<int, string>
+                {
+                    { 1, "顺时针" },
+                    { 2, "逆时针" }
+                };
+
                 var param = DbManager.Inst.QueryDatas<ProductParameters>().Where(p => p.RecipeName == "AAA").First();
 
                 if (param != null)
                 {
                     ProductParameters = param;
                 }
+
+                // 初始化线缆绘制
+                var wire1 = new ProductWireTwisPairInfo
+                {
+                    ShowWireDiam = 10,
+                    ColorStroke = Colors.Blue,
+                    ColorStroke1 = Colors.Blue,
+                    ColorStroke2 = Colors.Blue
+                };
+
+                var wire2 = new ProductWireTwisPairInfo
+                {
+                    ShowWireDiam = 10,
+                    ColorStroke = Colors.Green,
+                    ColorStroke1 = Colors.Green,
+                    ColorStroke2 = Colors.Green
+                };
+
+                DrawTwistedPair(wire1, wire2);
             }
             catch (Exception ex)
             {
