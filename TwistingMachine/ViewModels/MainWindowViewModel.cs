@@ -19,14 +19,15 @@ namespace TwistingMachine.ViewModels
             MinimizeCommand = new DelegateCommand(Minimize);
             OpenTestDialogCommand = new DelegateCommand(OpenTestDialog);
 
+            //初始化导航栏
             PageViewModels = new ObservableCollection<BindableBase>
             {
                 new ProductionViewModel { Title = "正在生产" },
+                new RecipeViewModel { Title = "配方" },
                 new SampleProductionViewModel { Title = "样品生产" },
                 new SettingsViewModel { Title = "设置" },
                 new DebugViewModel { Title = "调试" },
-                new IOStatusViewModel { Title = "IO状态" },
-                new RecipeViewModel { Title = "配方" }
+                new IOStatusViewModel { Title = "IO状态" }
             };
 
             CurrentViewModel = PageViewModels.First();
