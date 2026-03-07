@@ -17,7 +17,7 @@
         <!-- 第一行：缩略图 -->
         <GroupBox Grid.Row="0" Header="缩略图" BorderBrush="Gray" BorderThickness="1" Margin="5">
             <Grid>
-                <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="150">
+                <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="100">
                     <StackPanel Orientation="Horizontal">
                         <!-- 左侧线段 -->
                         <ItemsControl ItemsSource="{Binding LeftLineList}">
