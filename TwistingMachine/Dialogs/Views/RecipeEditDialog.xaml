@@ -10,7 +10,8 @@
                       Title="编辑配方"
                       Width="400" Height="400"
                       WindowStartupLocation="CenterOwner"
-                      ShowCloseButton="True" ShowMinButton="False" ShowMaxRestoreButton="False">
+                      ShowCloseButton="True" ShowMinButton="False" ShowMaxRestoreButton="False"
+                      ShowInTaskbar="False">
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
