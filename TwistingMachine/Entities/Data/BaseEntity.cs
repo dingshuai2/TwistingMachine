@@ -22,7 +22,7 @@ namespace TwistingMachine.Entities.Data
         /// <summary>
         /// 创建时间
         /// </summary>
-        private DateTime _createTime;
+        private DateTime _createTime = DateTime.Now;
         [SugarColumn(ColumnName = "create_time", ColumnDataType = "DATETIME", IsNullable = true, DefaultValue = "CURRENT_TIMESTAMP")]
         public DateTime CreateTime
         {
@@ -33,7 +33,7 @@ namespace TwistingMachine.Entities.Data
         /// <summary>
         /// 更新时间
         /// </summary>
-        private DateTime _updateTime;
+        private DateTime _updateTime = DateTime.Now;
         [SugarColumn(ColumnName = "update_time", ColumnDataType = "DATETIME", IsNullable = true, DefaultValue = "CURRENT_TIMESTAMP")]
         public DateTime UpdateTime
         {
